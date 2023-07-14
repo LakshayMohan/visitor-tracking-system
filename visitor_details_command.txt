@@ -1,0 +1,17 @@
+CREATE TABLE `visitor_details` (
+  `visitor_name` varchar(25) NOT NULL,
+  `visitor_ph_no` bigint NOT NULL,
+  `address` varchar(120) NOT NULL,
+  `no_of_person` varchar(3) NOT NULL,
+  `date_in` varchar(50) NOT NULL,
+  `date_out` varchar(45) DEFAULT NULL,
+  `time_in` varchar(20) NOT NULL,
+  `time_out` varchar(20) DEFAULT NULL,
+  `vehicle_no` varchar(45) DEFAULT NULL,
+  `purpose` varchar(100) NOT NULL,
+  `visitor_company` varchar(100) DEFAULT NULL,
+  `visiting_person_name` varchar(60) DEFAULT NULL,
+  `visiting_place` varchar(70) DEFAULT NULL,
+  `relationship` varchar(70) DEFAULT NULL,
+  PRIMARY KEY (`visitor_ph_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

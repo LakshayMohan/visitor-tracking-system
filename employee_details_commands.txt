@@ -1,0 +1,12 @@
+CREATE TABLE `employee_details` (
+  `emp_name` varchar(25) NOT NULL,
+  `emp_id` varchar(15) NOT NULL,
+  `emp_position` varchar(45) NOT NULL,
+  `emp_phone` bigint NOT NULL,
+  `date_in` varchar(30) NOT NULL,
+  `date_out` varchar(30) DEFAULT NULL,
+  `time_in` varchar(10) NOT NULL,
+  `time_out` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`emp_id`),
+  UNIQUE KEY `emp_id_UNIQUE` (`emp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

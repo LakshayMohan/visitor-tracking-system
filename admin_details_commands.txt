@@ -1,0 +1,9 @@
+CREATE TABLE `admin_details` (
+  `admin_name` varchar(25) NOT NULL,
+  `admin_id` varchar(15) NOT NULL,
+  `admin_password` varchar(15) NOT NULL,
+  `admin_phone` varchar(15) NOT NULL,
+  PRIMARY KEY (`admin_id`),
+  UNIQUE KEY `admin_id_UNIQUE` (`admin_id`),
+  UNIQUE KEY `admin_password_UNIQUE` (`admin_password`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

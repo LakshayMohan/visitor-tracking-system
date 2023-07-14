@@ -1,0 +1,13 @@
+CREATE TABLE `student_details` (
+  `S_name` varchar(25) NOT NULL,
+  `S_id` bigint NOT NULL,
+  `S_course` varchar(20) NOT NULL,
+  `S_ph_no` bigint NOT NULL,
+  `S_email` varchar(30) NOT NULL,
+  `date_in` varchar(45) NOT NULL,
+  `date_out` varchar(45) DEFAULT NULL,
+  `time_in` varchar(10) NOT NULL,
+  `time_out` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`S_id`),
+  UNIQUE KEY `S_id_UNIQUE` (`S_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
