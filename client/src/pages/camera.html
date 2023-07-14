@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera</title>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/webcam-easy?module"></script>
+  
+  <script>
+const firebaseConfig = {
+    apiKey: "AIzaSyDc9TCLm4bv8aft9I2Xj5ri2Y5DILXrAzk",
+    authDomain: "visitor-tracking-system-803fa.firebaseapp.com",
+    projectId: "visitor-tracking-system-803fa",
+    storageBucket: "visitor-tracking-system-803fa.appspot.com",
+    messagingSenderId: "975416758994",
+    appId: "1:975416758994:web:d493d3b09b50d616dbd30b"
+  };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+
+    // Get a reference to the Firebase Storage service
+    const storage = firebase.storage();
+
+    let webcam;
+
+    async function initializeCamera() {
+      try {
+        const video = document.getElementById("webCam");
+        const snapButton = document.querySelector("a");
+
+        webcam = new Webcam(video, "user");
+        await webcam.start();
+
+        // Show the "SNAP" button and video element
+        snapButton.style.display = "block";
+        video.style.display = "block";
+      } catch (err) {
+        console.error("Error starting camera:", err);
+      }
+    }
+
+    async function takeAPicture() {
+      try {
+        const picture = await webcam.snap();
+
+        // Create a reference to the Firebase Storage bucket
+        const storageRef = storage.ref("images");
+
+        // Generate a unique file name for the image
+        const fileName = `${Date.now()}.png`;
+
+        // Convert the base64 data URI to a Blob
+        const blob = await fetch(picture).then((response) => response.blob());
+
+        // Upload the image to Firebase Storage
+        await storageRef.child(fileName).put(blob);
+
+        // Get the download URL of the uploaded image
+        const downloadURL = await storageRef.child(fileName).getDownloadURL();
+
+        // Update the "SNAP" link with the download URL
+        const snapButton = document.querySelector("a");
+        snapButton.href = downloadURL;
+
+        console.log("Image uploaded successfully:", downloadURL);
+      } catch (err) {
+        console.error("Error taking picture or uploading:", err);
+      }
+    }
+
+    // Ask for camera permission on page load
+    document.addEventListener("DOMContentLoaded", initializeCamera);
+  </script>
+  
+  <style>
+    a {
+      padding: 10px;
+      background-color: orange;
+      color: white;
+      text-decoration: none;
+    }
+    canvas {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <video id="webCam" autoplay playsinline width="800" height="600" style="display: none;"></video>
+  <canvas id="canvas"></canvas>
+  <a download onClick="takeAPicture()" style="display: none;">SNAP</a>
+</body>
+</html>
